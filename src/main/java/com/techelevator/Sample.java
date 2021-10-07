@@ -26,7 +26,7 @@ public class Sample {
             }
             inventory.put(arr[0], item);
         }
-        System.out.println(inventory.get("A1").getName());
+        System.out.println(inventory.get("A1").giveMessage());
     }
 
 }

@@ -3,7 +3,8 @@ package com.techelevator;
 public class VendingMachineCLI {
 
 	public static void main(String[] args) {
-		Sample sample = new Sample();
-		sample.bla();
+		// read csv file, store data in variable
+		// build inventory & sales report
+		MainMenu.run();
 	}
 }

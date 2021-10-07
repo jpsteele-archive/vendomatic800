@@ -2,70 +2,66 @@ package com.techelevator;
 
 import java.util.List;
 
-public class MainMenu extends Menu {
+public class MainMenu {
+    private static List<String> options = List.of(
+            "(1) Display Vending Machine Items",
+            "(2) Purchase",
+            "(3) Exit");
 
-    public MainMenu() {
-        super();
-        addOption("(1) Display Vending Machine Items");
-        addOption("(2) Purchase");
-        addOption("(3) Exit");
-
-    }
-
-    public void run() {
+    public static void run() {
         while (true) {
-            for (String option : getOptions()) {
-                Printer.print(option);
+            Printer.newLine();
+            for (String option : options) {
+                Printer.println(option);
             }
-            Printer.newLine(1);
-            String input = UserInput.get("Please enter your selection");
+            Printer.newLine();
+            String input = UserInput.get("Please enter your selection: ");
             issueCommand(input);
         }
 
     }
 
-    public boolean validateInput(String input) {
-        if (input != "1" && input != "2" && input != "3" && input != "4") {
+    public static boolean validateInput(String input) {
+        if (!input.equals("1") && !input.equals("2") && !input.equals("3") && !input.equals("4")) {
             return false;
         }
         return true;
     }
 
-    public void issueCommand(String input) {
+    public static void issueCommand(String input) {
         if (!validateInput(input)) {
-            Printer.print("Please enter a valid input.");
+            Printer.print("\nPlease enter a valid input.\n");
             return;
         }
-        if (input == "1") {
+        if (input.equals("1")) {
             displayItems();
             return;
         }
-        if (input == "2") {
+        if (input.equals("2")) {
             purchase();
             return;
         }
-        if (input == "3") {
-            exit();
-        }
-        if (input == "4") {
+        if (input.equals("3")) exit();
+
+        if (input.equals("4")) {
             salesReport();
             return;
         }
     }
 
-    public void displayItems() {
+    public static void displayItems() {
 
     }
 
-    public void purchase() {
+    public static void purchase() {
         Purchase.run();
     }
 
-    public void exit() {
+    public static void exit() {
         System.exit(0);
     }
 
-    public void salesReport() {
+    public static void salesReport() {
 
     }
 }
