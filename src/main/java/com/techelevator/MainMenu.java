@@ -13,9 +13,15 @@ public class MainMenu extends Menu {
     }
 
     public void run() {
-        for (String option : getOptions()) {
-            Printer.print()
+        while (true) {
+            for (String option : getOptions()) {
+                Printer.print(option);
+            }
+            Printer.newLine(1);
+            String input = UserInput.get("Please enter your selection");
+            issueCommand(input);
         }
+
     }
 
     public boolean validateInput(String input) {
@@ -41,6 +47,10 @@ public class MainMenu extends Menu {
         if (input == "3") {
             exit();
         }
+        if (input == "4") {
+            salesReport();
+            return;
+        }
     }
 
     public void displayItems() {
@@ -53,5 +63,9 @@ public class MainMenu extends Menu {
 
     public void exit() {
         System.exit(0);
+    }
+
+    public void salesReport() {
+
     }
 }
