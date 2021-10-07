@@ -21,32 +21,12 @@ public class MainMenu {
 
     }
 
-    public static boolean validateInput(String input) {
-        if (!input.equals("1") && !input.equals("2") && !input.equals("3") && !input.equals("4")) {
-            return false;
-        }
-        return true;
-    }
-
     public static void issueCommand(String input) {
-        if (!validateInput(input)) {
-            Printer.print("\nPlease enter a valid input.\n");
-            return;
-        }
-        if (input.equals("1")) {
-            displayItems();
-            return;
-        }
-        if (input.equals("2")) {
-            purchase();
-            return;
-        }
-        if (input.equals("3")) exit();
-
-        if (input.equals("4")) {
-            salesReport();
-            return;
-        }
+        if (input.equals("1")) displayItems();
+        else if (input.equals("2")) purchase();
+        else if (input.equals("3")) exit();
+        else if (input.equals("4")) salesReport();
+        else Printer.println("\nPlease enter a valid input");
     }
 
     public static void displayItems() {
