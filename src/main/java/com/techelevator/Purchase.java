@@ -11,15 +11,6 @@ public class Purchase {
             "(3) Finish Transaction");
 
 
-    /*
-    When a purchase is made:
-        remove item from inventory
-        add entry to log
-        increment item number in sales report
-        add to total in sales report
-     */
-
-
     public static void run() {
         while (true) {
             Printer.newLine();
@@ -36,9 +27,12 @@ public class Purchase {
 
     public static void issueCommand(String input) {
         if (input.equals("1")) feedMoney();
-//        else if (input.equals("2")) vendProduct();
-//        else if (input.equals("3")) makeChange();
-        else Printer.println("Please enter a valid input\n");
+        else if (input.equals("2")) vendProduct();
+        else if (input.equals("3")) makeChange();
+        else {
+            Printer.newLine();
+            Printer.println("Please enter a valid input");
+        }
     }
 
     public static void feedMoney() {
@@ -62,6 +56,42 @@ public class Purchase {
 
     public static void addToBalance(double amount) {
         balance += amount;
+    }
+
+    public static void vendProduct() {
+        /*
+        When a purchase is made:
+        remove item from inventory
+        add entry to log
+        increment item number in sales report
+        add to total in sales report
+        */
+
+        MainMenu.displayItems();
+    }
+
+    public static void makeChange() {
+        double initialBalance = getBalance();
+        int quarters = 0;
+        int dimes = 0;
+        int nickels = 0;
+
+        while (balance > 0) {
+            if (balance >= 0.25) {
+                balance -= 0.25;
+                quarters++;
+            } else if (balance >= 10) {
+                balance -= 0.10;
+                dimes++;
+            } else {
+                balance -= 0.05;
+                nickels++;
+            }
+        }
+
+        Printer.newLine();
+        Printer.println("Your change is " + initialBalance + " dispensed in " + quarters + " quarters, " + dimes
+                + " dimes, and " + nickels + " nickels. Thank you for your business!\n");
     }
 
     public static double getBalance() {

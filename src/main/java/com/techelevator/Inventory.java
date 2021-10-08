@@ -10,14 +10,14 @@ public class Inventory {
     public static void buildInventory() {
         List<String[]> temp = FileIO.getCsvLines();
         for (String[] element : temp) {
-            Item item = null;
-            if (element[3] == "Drink") {
+            Item item = new Item("", 0.0);
+            if (element[3].equals("Drink")) {
                 item = new Drink(element[1], Double.parseDouble(element[2]));
-            } else if (element[3] == "Chips") {
+            } else if (element[3].equals("Chip")) {
                 item = new Chip(element[1], Double.parseDouble(element[2]));
-            } else if (element[3] == "Candy"){
+            } else if (element[3].equals("Candy")){
                 item = new Candy(element[1], Double.parseDouble(element[2]));
-            } else if (element[3] == "Gum"){
+            } else if (element[3].equals("Gum")){
                 item = new Gum(element[1], Double.parseDouble(element[2]));
             }
             inventory.put(element[0], List.of(item, item, item, item, item));

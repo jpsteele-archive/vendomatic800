@@ -1,5 +1,7 @@
 package com.techelevator;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -36,9 +38,14 @@ public class MainMenu {
         Item item;
         List<Item> items;
         int size;
+        List<String> keys = new ArrayList<>();
+        for (String slot : inventory.keySet()) {
+            keys.add(slot);
+        }
+        Collections.sort(keys);
         Printer.newLine();
         Printer.println("Current Inventory:");
-        for (String slot : inventory.keySet()) {
+        for (String slot : keys) {
             items = inventory.get(slot);
             size = items.size();
             if (size > 0) {
@@ -48,7 +55,6 @@ public class MainMenu {
                 Printer.println(slot + ": Empty!");
             }
         }
-        Printer.newLine();
     }
 
     public static void purchase() {

@@ -7,8 +7,7 @@ public class VendingMachineCLI {
 	public static void main(String[] args) {
 		FileIO.load();
 		FileIO.appendLog("FEED MONEY", 5.00, 10.00);
-
-		// build inventory
+		Inventory.buildInventory();
 		// build sales report
 		MainMenu.run();
 
