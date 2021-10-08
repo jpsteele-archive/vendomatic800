@@ -3,9 +3,7 @@ package com.techelevator;
 import java.io.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class FileIO {
     private static File readFile = new File("vendingmachine.csv");
@@ -27,6 +25,29 @@ public class FileIO {
 
     public static List<String[]> getCsvLines() {
         return csvLines;
+    }
+
+    public static void createNewSalesReport(Item item, int quantity){
+        try(PrintWriter append = new PrintWriter(salesReportDir)){
+            append.println();
+        } catch (Exception e){
+            Printer.println("Could not add to Sales Report");
+        }
+    }
+    public static void createRunningSalesReport(Item item, int quantity){
+        try(PrintWriter append = new PrintWriter(salesReportDir)){
+            Map<String, Integer> temp = new HashMap<>();
+
+        } catch (Exception e){
+            Printer.println("Could not add to Sales Report");
+        }
+    }
+    public static void readRunningSalesReport(Item item, int quantity){
+        try(PrintWriter append = new PrintWriter(salesReportDir)){
+            append.println();
+        } catch (Exception e){
+            Printer.println("Could not add to Sales Report");
+        }
     }
 
     /**
