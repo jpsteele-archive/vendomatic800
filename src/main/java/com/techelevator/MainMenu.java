@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import java.util.List;
+import java.util.Map;
 
 public class MainMenu {
     private static List<String> options = List.of(
@@ -30,7 +31,23 @@ public class MainMenu {
     }
 
     public static void displayItems() {
-
+        Map<String, List<Item>> inventory = Inventory.getInventory();
+        Item item;
+        List<Item> items;
+        int size;
+        Printer.newLine();
+        Printer.println("Current Inventory:");
+        for (String slot : inventory.keySet()) {
+            items = inventory.get(slot);
+            size = items.size();
+            if (size > 0) {
+                item = items.get(0);
+                Printer.println(slot + ": " + item.getName() + ", $" + item.getPrice() + ", stock: " + size);
+            } else {
+                Printer.println(slot + ": Empty!");
+            }
+        }
+        Printer.newLine();
     }
 
     public static void purchase() {
