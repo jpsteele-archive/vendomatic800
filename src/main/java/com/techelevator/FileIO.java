@@ -8,12 +8,13 @@ import java.util.*;
 public class FileIO {
     private static File readFile = new File("vendingmachine.csv");
     private static File logFile = new File("Log.txt");
-    private static File salesReportDir = new File("src/main/resources/");
+    private static File persistentSalesReportFile = new File("src/main/resources/salesreport.txt");
+    private static File salesReportDir = new File("sales_reports/");
 
     private static List<String[]> csvLines = new ArrayList<>();
 
 
-    public static void load() {
+    public static void loadCsv() {
         try (Scanner dataInput = new Scanner(readFile)) {
             while (dataInput.hasNextLine()) {
                 csvLines.add(dataInput.nextLine().split("\\|"));
@@ -25,6 +26,25 @@ public class FileIO {
 
     public static List<String[]> getCsvLines() {
         return csvLines;
+    }
+
+    public static Map<String,Integer> loadSalesReport() {
+        Map<String,Integer> salesReportMap = new HashMap<>();
+        try (Scanner reader = new Scanner(persistentSalesReportFile)) {
+            while (reader.hasNextLine()) {
+                String[] line = reader.nextLine().split("\\|");
+                if (line.length < 2) continue;
+                try {
+                    int quantity = Integer.parseInt(line[1]);
+                    salesReportMap.put(line[0], quantity);
+                } catch (NumberFormatException e) {
+                    continue;
+                }
+            }
+        } catch (FileNotFoundException e) {
+            return salesReportMap;
+        }
+        return salesReportMap;
     }
 
     public static void createNewSalesReport(Item item, int quantity){

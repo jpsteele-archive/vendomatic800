@@ -1,13 +1,24 @@
 package com.techelevator;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class SalesReport {
-    private double total = 0.0;
-    private Map<String, Integer> runningSalesMap = new HashMap<>();
+    private static double totalSales = 0.0;
+    private static Map<String, Integer> runningSalesMap = new HashMap<>();
+
+    /*
+    on startup: load runningSalesMap from persistentFile, check FileIO.getCsvLines() for new items
+    on sale: update runningSalesMap and overwrite persistentFile
+    on main menu option 4: write new file in salesReportDir
+     */
+
+    public static void loadRunningSalesMap() {
+        runningSalesMap = FileIO.loadSalesReport();
+    }
 
     public void createRunningSalesMap(){
         List<String[]> listOfItems = FileIO.getCsvLines();
@@ -18,7 +29,7 @@ public class SalesReport {
         }
     }
 
-    public Map<String, Integer> getRunningSalesMap() {
+    public static Map<String, Integer> getRunningSalesMap() {
         return runningSalesMap;
     }
 
@@ -27,7 +38,7 @@ public class SalesReport {
     // add to total
 
 
-    public double getTotal() {
-        return total;
+    public static double getTotalSales() {
+        return totalSales;
     }
 }
