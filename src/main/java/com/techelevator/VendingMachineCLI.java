@@ -7,9 +7,9 @@ public class VendingMachineCLI {
 		Inventory.buildInventory();
 		SalesReport.loadRunningSalesMap();
 
-		for (String key : SalesReport.getRunningSalesMap().keySet()) {
-			System.out.println(key + " " + SalesReport.getRunningSalesMap().get(key));
-		}
+//		for (String key : SalesReport.getRunningSalesMap().keySet()) {
+//			System.out.println(key + " " + SalesReport.getRunningSalesMap().get(key));
+//		}
 
 		MainMenu.run();
 
