@@ -32,6 +32,12 @@ public class Inventory {
         return name;
     }
 
+    public static Item getItem(String input){
+        List<Item> itemList = inventory.get(input);
+        Item itemToVend = itemList.get(0);
+        return itemToVend;
+    }
+
     public static Map<String, List<Item>> getInventory() {
         return inventory;
     }
