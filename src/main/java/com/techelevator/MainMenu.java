@@ -9,6 +9,7 @@ public class MainMenu {
             "(2) Purchase",
             "(3) Exit");
 
+
     public static void run() {
         while (true) {
             Printer.newLine();
