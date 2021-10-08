@@ -1,6 +1,8 @@
 package com.techelevator;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Purchase {
     private static double balance = 0.0;
@@ -58,7 +60,27 @@ public class Purchase {
         balance += amount;
     }
 
+    public static boolean isValidKeySlot(String input) {
+        boolean returnStatement = false;
+        for (String element : Inventory.getInventory().keySet()) {
+            if (input.equals(element)) {
+                returnStatement = true;
+            }
+        }
+        return returnStatement;
+    }
     public static void vendProduct() {
+        String input = UserInput.get("Please enter your selection:");
+        if (!isValidKeySlot(input)){
+            Printer.println("Input not valid. ");
+            input = UserInput.get("Please enter valid selection again:");
+        }
+        Map<String, List<Item>> temp1 = new HashMap<>();
+        Item itemToVend = Inventory.getItem(input);
+        String itemName = itemToVend.getName();
+        double itemPrice = itemToVend.getPrice();
+        Inventory.removeItem(itemToVend);
+        FileIO.appendLog(itemName, itemPrice, balance);
         /*
         When a purchase is made:
         remove item from inventory
