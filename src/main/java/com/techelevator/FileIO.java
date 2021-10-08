@@ -29,6 +29,11 @@ public class FileIO {
         return csvLines;
     }
 
+    /**
+     * @param action keyword String for the action being taken
+     * @param leftAmount first monetary value
+     * @param rightAmount second monetary value
+     */
     public static void appendLog(String action, double leftAmount, double rightAmount) {
         LocalDateTime dateTime = LocalDateTime.now();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
