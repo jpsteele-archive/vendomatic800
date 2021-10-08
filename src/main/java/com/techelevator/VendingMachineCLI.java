@@ -1,21 +1,22 @@
 package com.techelevator;
 
-import java.util.List;
-
 public class VendingMachineCLI {
 
 	public static void main(String[] args) {
 		FileIO.loadCsv();
-		FileIO.appendLog("FEED MONEY", 5.00, 10.00);
 		Inventory.buildInventory();
-		// build sales report
+		SalesReport.loadRunningSalesMap();
+
+		for (String key : SalesReport.getRunningSalesMap().keySet()) {
+			System.out.println(key + " " + SalesReport.getRunningSalesMap().get(key));
+		}
+
 		MainMenu.run();
 
 
 //		FileIO.load();
 //		System.out.println(FileIO.getCsvLines().get(4)[1]);
 //
-		FileIO.appendLog("FEED MONEY", 5.00, 10.00);
 
 	}
 }

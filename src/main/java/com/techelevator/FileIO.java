@@ -37,9 +37,7 @@ public class FileIO {
                 try {
                     int quantity = Integer.parseInt(line[1]);
                     salesReportMap.put(line[0], quantity);
-                } catch (NumberFormatException e) {
-                    continue;
-                }
+                } catch (NumberFormatException ignored) {}
             }
         } catch (FileNotFoundException e) {
             return salesReportMap;

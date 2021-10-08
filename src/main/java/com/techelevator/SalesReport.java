@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class SalesReport {
     private static double totalSales = 0.0;
@@ -18,13 +19,19 @@ public class SalesReport {
 
     public static void loadRunningSalesMap() {
         runningSalesMap = FileIO.loadSalesReport();
+        addNewItemsToSalesMap();
     }
 
-    public void createRunningSalesMap(){
-        List<String[]> listOfItems = FileIO.getCsvLines();
-        for (String[] element : listOfItems){
-
+    public static void addNewItemsToSalesMap(){
+        // create a set of the names of the items already in the sales report
+        Set<String> salesReportKeys = runningSalesMap.keySet();
+        // iterate through the item data in the csv file
+        for (String[] element : FileIO.getCsvLines()){
+            // set the item name value to a string variable
             String itemName = element[1];
+            // check to see if the item already exists in the sales report
+            if (salesReportKeys.contains(itemName)) continue;
+            // if the item isn't already accounted for, add it with 0 sales
             runningSalesMap.put(itemName, 0);
         }
     }
