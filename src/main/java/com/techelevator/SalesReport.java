@@ -40,16 +40,15 @@ public class SalesReport {
         return runningSalesMap;
     }
 
-    // add to sales number
-    public static void addToSalesReportMap(Item itemToVend){
-        String item = itemToVend.toString();
-        runningSalesMap.put(item, 1);
+    public static void addToSalesReportMap(String itemName){
+        runningSalesMap.put(itemName, 1);
     }
 
     // add to total
-
-    //
-
+    public static double addToTotal(double price){
+        totalSales += price;
+        return totalSales;
+    }
 
     public static double getTotalSales() {
         return totalSales;

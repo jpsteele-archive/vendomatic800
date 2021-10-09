@@ -96,8 +96,8 @@ public class Purchase {
         }
         Inventory.removeItem(input);
         FileIO.appendLog(itemName, balanceBefore, getBalance());
-        // increment sales report
-        // add to total in sales report
+        SalesReport.addToSalesReportMap(itemName);
+        SalesReport.addToTotal(itemPrice);
         Printer.println("Thank you for your purchase!");
     }
 
