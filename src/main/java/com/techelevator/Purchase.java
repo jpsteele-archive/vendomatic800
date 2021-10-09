@@ -111,7 +111,7 @@ public class Purchase {
             if (balance >= 0.25) {
                 balance -= 0.25;
                 quarters++;
-            } else if (balance >= 10) {
+            } else if (balance >= 0.10) {
                 balance -= 0.10;
                 dimes++;
             } else {

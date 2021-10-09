@@ -15,6 +15,7 @@ public class FileIO {
 
 
     public static void loadCsv() {
+        csvLines = new ArrayList<>();
         try (Scanner dataInput = new Scanner(readFile)) {
             while (dataInput.hasNextLine()) {
                 csvLines.add(dataInput.nextLine().split("\\|"));
