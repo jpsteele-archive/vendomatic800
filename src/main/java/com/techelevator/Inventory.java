@@ -1,8 +1,6 @@
 package com.techelevator;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Inventory {
     private static Map<String, List<Item>> inventory = new HashMap<>();
@@ -28,8 +26,17 @@ public class Inventory {
         return quantity;
     }
     public static void removeItem(String slot){
+        // Instantiate item from inventory
         Item item = inventory.get(slot).get(0);
-        inventory.get(slot).remove(item);
+        // create a new List from which we can remove easier
+        List<Item> newList = new ArrayList<>();
+        // pull the current list into the new list
+        newList = inventory.get(slot);
+        // remove one item from the new list
+        newList.remove(item);
+        // put the new list in place of the old list
+        inventory.put(slot, newList);
+
     }
 
     public static Item getItem(String slot){
