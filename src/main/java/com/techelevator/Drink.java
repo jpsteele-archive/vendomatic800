@@ -8,6 +8,8 @@ public class Drink extends Item{
     @Override
     public String giveMessage(){
         String drinkMessage = "Glug Glug, Yum!";
+        Printer.newLine();
+        Printer.println(drinkMessage);
         return drinkMessage;
     }
 }

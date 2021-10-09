@@ -8,9 +8,9 @@ import java.util.Map;
 public class Purchase {
 
     /*
-    vendProduct needs to output the message for the item being vended ("crunch crunch yum!")
+    vendProduct needs to output the message for the item being vended ("crunch crunch yum!") -- DONE
     log and sales report need to be updated appropriately when items are purchased. Some methods still need to be written for this in Sales Report
-    Make sure output looks clean with newLines
+    Make sure output looks clean with newLines -- DONE
      */
 
     private static String balance = MoneyMath.format("0");
@@ -105,9 +105,10 @@ public class Purchase {
             return;
         }
         Inventory.removeItem(input);
+        itemToVend.giveMessage();
         FileIO.appendLog(itemName, balanceBefore, getBalance());
-        //SalesReport.addToSalesReportMap(itemName);
-        //SalesReport.addToTotal(itemToVend.getPrice());
+        SalesReport.addSale(itemName);
+        SalesReport.addTotal(itemPrice);
         Printer.println("Thank you for your purchase!");
     }
 
