@@ -6,6 +6,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class FileIO {
+
+    /*
+    See notes in SalesReport
+     */
+
     private static File readFile = new File("vendingmachine.csv");
     private static File logFile = new File("Log.txt");
     private static File persistentSalesReportFile = new File("src/main/resources/salesreport.txt");
