@@ -8,7 +8,6 @@ public class Chip extends Item{
     @Override
     public String giveMessage(){
         String chipMessage = "Crunch Crunch, Yum!";
-        Printer.newLine();
         Printer.println(chipMessage);
         return chipMessage;
     }

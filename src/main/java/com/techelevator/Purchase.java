@@ -52,7 +52,7 @@ public class Purchase {
         String input = UserInput.get("Please feed money now (accepts whole numbers): $");
         if (isValidInt(input)) {
             addToBalance(input);
-            FileIO.appendLog("FEED MONEY", input, balance);
+            FileIO.appendLog("FEED MONEY:", MoneyMath.format(input), balance);
         } else {
             Printer.newLine();
             Printer.println("Please enter a valid positive whole number.\n");
@@ -88,30 +88,33 @@ public class Purchase {
             Printer.newLine();
             input = UserInput.get("Please enter your selection: ");
             if (!isValidKeySlot(input)) {
+                Printer.newLine();
                 Printer.println("Input not valid. ");
-                continue;
+                return;
             }
             break;
         }
         Item itemToVend = Inventory.getItem(input);
         if (itemToVend == null) {
-            Printer.println("That slot is empty!");
+            Printer.println("That slot is SOLD OUT!");
             return;
         }
         String itemName = itemToVend.getName();
         String itemPrice = String.valueOf(itemToVend.getPrice());
         String balanceBefore = getBalance();
         if (!debit(itemPrice)) {
+            Printer.newLine();
             Printer.println("Insufficient funds! Please feed more money.");
             return;
         }
         Inventory.removeItem(input);
+        Printer.newLine();
+        Printer.println("Here is your " + itemToVend.getName() + "! We have withdrawn $" + MoneyMath.format(String.valueOf(itemToVend.getPrice())) + " from your balance.");
         itemToVend.giveMessage();
         String logName = itemName + " " + input;
         FileIO.appendLog(logName, balanceBefore, getBalance());
         SalesReport.addSale(itemName);
         SalesReport.addTotal(itemPrice);
-        Printer.newLine();
         Printer.println("Thank you for your purchase!");
     }
 
@@ -133,7 +136,7 @@ public class Purchase {
                 nickels++;
             }
         }
-        FileIO.appendLog("MAKE CHANGE", initialBalance, balance);
+        FileIO.appendLog("MAKE CHANGE:", MoneyMath.format(initialBalance), balance);
         Printer.newLine();
         Printer.println("Your change is $" + initialBalance + " dispensed in " + quarters + " quarters, " + dimes
                 + " dimes, and " + nickels + " nickels. Thank you for your business!");

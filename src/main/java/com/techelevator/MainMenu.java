@@ -52,7 +52,7 @@ public class MainMenu {
                 item = items.get(0);
                 Printer.println(slot + ": " + item.getName() + ", $" + item.getPrice() + ", stock: " + size);
             } else {
-                Printer.println(slot + ": Empty!");
+                Printer.println(slot + ": SOLD OUT");
             }
         }
     }

@@ -8,7 +8,6 @@ public class Gum extends Item{
     @Override
     public String giveMessage(){
         String gumMessage = "Chew Chew, Yum!";
-        Printer.newLine();
         Printer.println(gumMessage);
         return gumMessage;
     }

@@ -86,7 +86,7 @@ public class FileIO {
      */
     public static void appendLog(String action, String leftAmount, String rightAmount) {
         LocalDateTime dateTime = LocalDateTime.now();
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss a");
         try (PrintWriter writer = new PrintWriter(new FileOutputStream(logFile, true))) {
             writer.println(dateTime.format(format) + " " + action + " $" + leftAmount + " $" + rightAmount);
         } catch (FileNotFoundException e) {
