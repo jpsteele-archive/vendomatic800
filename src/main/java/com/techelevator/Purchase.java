@@ -107,8 +107,8 @@ public class Purchase {
         Inventory.removeItem(input);
         itemToVend.giveMessage();
         FileIO.appendLog(itemName, balanceBefore, getBalance());
-        //SalesReport.addToSalesReportMap(itemName);
-        //SalesReport.addToTotal(itemToVend.getPrice());
+        SalesReport.addSale(itemName);
+        SalesReport.addTotal(itemPrice);
         Printer.println("Thank you for your purchase!");
     }
 
