@@ -1,24 +1,21 @@
 package com.techelevator;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class FileIO {
-
-    /*
-    See notes in SalesReport
-     */
-
-    private static File readFile = new File("vendingmachine.csv");
-    private static File logFile = new File("Log.txt");
-    private static File persistentSalesReportFile = new File("src/main/resources/salesreport.txt");
-    private static File salesReportDir = new File("sales_reports/");
-
+    private static final File readFile = new File("vendingmachine.csv");
+    private static final File logFile = new File("Log.txt");
+    private static final File persistentSalesReportFile = new File("src/main/resources/salesreport.txt");
+    private static final String salesReportDir = "sales_reports/";
     private static List<String[]> csvLines = new ArrayList<>();
 
-
+    /**
+     * creates a List of String arrays as a structured data version of the csv database file to be used for populating Sales Report and Inventory
+     */
     public static void loadCsv() {
         csvLines = new ArrayList<>();
         try (Scanner dataInput = new Scanner(readFile)) {
@@ -30,10 +27,11 @@ public class FileIO {
         }
     }
 
-    public static List<String[]> getCsvLines() {
-        return csvLines;
-    }
 
+
+    /**
+     * @return a Map of item names as keys and total quantity sold as values
+     */
     public static Map<String,Integer> loadSalesReport() {
         Map<String,Integer> salesReportMap = new HashMap<>();
         try (Scanner reader = new Scanner(persistentSalesReportFile)) {
@@ -52,29 +50,32 @@ public class FileIO {
     }
 
     public static String loadSalesReportTotal() {
-        return "";
-    }
-
-    public static void createNewSalesReport(Item item, int quantity){
-        try(PrintWriter append = new PrintWriter(salesReportDir)){
-            append.println();
-        } catch (Exception e){
-            Printer.println("Could not add to Sales Report");
+        try (Scanner fileData = new Scanner(persistentSalesReportFile)) {
+            while (fileData.hasNextLine()) {
+                if (fileData.nextLine().equals("")) break;
+            }
+            return fileData.nextLine();
+        } catch (FileNotFoundException e) {
+            return "0.00";
         }
     }
-    public static void createRunningSalesReport(Item item, int quantity){
-        try(PrintWriter append = new PrintWriter(salesReportDir)){
-            Map<String, Integer> temp = new HashMap<>();
 
-        } catch (Exception e){
-            Printer.println("Could not add to Sales Report");
-        }
-    }
-    public static void readRunningSalesReport(Item item, int quantity){
-        try(PrintWriter append = new PrintWriter(salesReportDir)){
-            append.println();
-        } catch (Exception e){
-            Printer.println("Could not add to Sales Report");
+    public static boolean writeSalesReport(boolean isPersistent) {
+        File file;
+        LocalDateTime dateTime = LocalDateTime.now();
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MM-DD-yyyy_HH-mm-ss");
+        if (isPersistent) file = persistentSalesReportFile;
+        else file = new File(salesReportDir + "SR_" + dateTime.format(format));
+        try (PrintWriter writer = new PrintWriter(file)) {
+            Map<String,Integer> map = SalesReport.getRunningSalesMap();
+            for (String key : map.keySet()) {
+                writer.println(key + "|" + map.get(key));
+            }
+            writer.println();
+            writer.println(SalesReport.getTotalSales());
+            return true;
+        } catch (FileNotFoundException e) {
+            return false;
         }
     }
 
@@ -93,4 +94,31 @@ public class FileIO {
         }
     }
 
+    public static List<String[]> getCsvLines() {
+        return csvLines;
+    }
+
+
+//    public static void createNewSalesReport(Item item, int quantity){
+//        try(PrintWriter append = new PrintWriter(salesReportDir)){
+//            append.println();
+//        } catch (Exception e){
+//            Printer.println("Could not add to Sales Report");
+//        }
+//    }
+//    public static void createRunningSalesReport(Item item, int quantity){
+//        try(PrintWriter append = new PrintWriter(salesReportDir)){
+//            Map<String, Integer> temp = new HashMap<>();
+//
+//        } catch (Exception e){
+//            Printer.println("Could not add to Sales Report");
+//        }
+//    }
+//    public static void readRunningSalesReport(Item item, int quantity){
+//        try(PrintWriter append = new PrintWriter(salesReportDir)){
+//            append.println();
+//        } catch (Exception e){
+//            Printer.println("Could not add to Sales Report");
+//        }
+//    }
 }
