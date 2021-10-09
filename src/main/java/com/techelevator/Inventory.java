@@ -32,13 +32,6 @@ public class Inventory {
         inventory.get(slot).remove(item);
     }
 
-<<<<<<< HEAD
-    public static Item getItem(String input){
-        // add a if input > 1
-        List<Item> itemList = inventory.get(input);
-        Item itemToVend = itemList.get(0);
-        return itemToVend;
-=======
     public static Item getItem(String slot){
         List<Item> itemList = inventory.get(slot);
         if (itemList.size() > 0) {
@@ -46,7 +39,6 @@ public class Inventory {
             return itemToVend;
         }
         return null;
->>>>>>> 9340da7bd6d364c71d00dbce6e7798cda889d0a8
     }
 
     public static Map<String, List<Item>> getInventory() {

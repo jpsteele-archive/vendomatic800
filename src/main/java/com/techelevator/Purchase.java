@@ -129,18 +129,15 @@ public class Purchase {
         return balance;
     }
 
-<<<<<<< HEAD
     public double resetBalance() {
         this.balance = 0;
         return balance;
-=======
     public static boolean debit(double price) {
         if (balance > price) {
             balance -= price;
             return true;
         }
         else return false;
->>>>>>> 9340da7bd6d364c71d00dbce6e7798cda889d0a8
     }
 
 }
