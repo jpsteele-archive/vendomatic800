@@ -60,8 +60,8 @@ public class PurchaseTest {
         test.makeChange();
     }
     @Test
-    public void test_make_change_not_all_quarters(){ // This shows that the method isn't giving us any dimes
-        Purchase.addToBalance(0.65);
+    public void test_make_change_dimes_at_40(){ // This shows that the method isn't giving us any dimes
+        Purchase.addToBalance(19.35);
         double input = Purchase.getBalance();
         test.makeChange();
     }

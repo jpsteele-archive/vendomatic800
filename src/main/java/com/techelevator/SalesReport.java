@@ -41,6 +41,10 @@ public class SalesReport {
     }
 
     // add to sales number
+    public static void addToSalesReportMap(Item itemToVend){
+        String item = itemToVend.toString();
+        runningSalesMap.put(item, 1);
+    }
 
     // add to total
 
