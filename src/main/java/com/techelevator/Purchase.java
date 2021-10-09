@@ -52,6 +52,7 @@ public class Purchase {
         String input = UserInput.get("Please feed money now (accepts whole numbers): $");
         if (isValidInt(input)) {
             addToBalance(input);
+            FileIO.appendLog("FEED MONEY", input, balance);
         } else {
             Printer.newLine();
             Printer.println("Please enter a valid positive whole number.\n");
@@ -106,7 +107,8 @@ public class Purchase {
         }
         Inventory.removeItem(input);
         itemToVend.giveMessage();
-        FileIO.appendLog(itemName, balanceBefore, getBalance());
+        String logName = itemName + " " + input;
+        FileIO.appendLog(logName, balanceBefore, getBalance());
         SalesReport.addSale(itemName);
         SalesReport.addTotal(itemPrice);
         Printer.println("Thank you for your purchase!");
@@ -130,6 +132,7 @@ public class Purchase {
                 nickels++;
             }
         }
+        FileIO.appendLog("MAKE CHANGE", initialBalance, balance);
         Printer.newLine();
         Printer.println("Your change is $" + initialBalance + " dispensed in " + quarters + " quarters, " + dimes
                 + " dimes, and " + nickels + " nickels. Thank you for your business!");
