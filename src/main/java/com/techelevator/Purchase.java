@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,35 +62,43 @@ public class Purchase {
     }
 
     public static boolean isValidKeySlot(String input) {
-        boolean returnStatement = false;
+        boolean isvalid = false;
         for (String element : Inventory.getInventory().keySet()) {
             if (input.equals(element)) {
-                returnStatement = true;
+                isvalid = true;
             }
         }
-        return returnStatement;
+        return isvalid;
     }
+
     public static void vendProduct() {
-        String input = UserInput.get("Please enter your selection:");
-        if (!isValidKeySlot(input)){
-            Printer.println("Input not valid. ");
-            input = UserInput.get("Please enter valid selection again:");
+        String input;
+        MainMenu.displayItems();
+        while (true) {
+            input = UserInput.get("Please enter your selection:");
+            if (!isValidKeySlot(input)) {
+                Printer.println("Input not valid. ");
+                continue;
+            }
+            break;
         }
-        Map<String, List<Item>> temp1 = new HashMap<>();
         Item itemToVend = Inventory.getItem(input);
+        if (itemToVend == null) {
+            Printer.println("That slot is empty!");
+            return;
+        }
         String itemName = itemToVend.getName();
         double itemPrice = itemToVend.getPrice();
-        Inventory.removeItem(itemToVend);
-        FileIO.appendLog(itemName, itemPrice, balance);
-        /*
-        When a purchase is made:
-        remove item from inventory
-        add entry to log
-        increment item number in sales report
-        add to total in sales report
-        */
-
-        MainMenu.displayItems();
+        double balanceBefore = getBalance();
+        if (!debit(itemPrice)) {
+            Printer.println("Insufficient funds! Please feed more money.");
+            return;
+        }
+        Inventory.removeItem(input);
+        FileIO.appendLog(itemName, balanceBefore, getBalance());
+        // increment sales report
+        // add to total in sales report
+        Printer.println("Thank you for your purchase!");
     }
 
     public static void makeChange() {
@@ -120,9 +129,18 @@ public class Purchase {
         return balance;
     }
 
+<<<<<<< HEAD
     public double resetBalance() {
         this.balance = 0;
         return balance;
+=======
+    public static boolean debit(double price) {
+        if (balance > price) {
+            balance -= price;
+            return true;
+        }
+        else return false;
+>>>>>>> 9340da7bd6d364c71d00dbce6e7798cda889d0a8
     }
 
 }

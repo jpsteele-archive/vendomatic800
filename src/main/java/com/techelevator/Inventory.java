@@ -27,16 +27,26 @@ public class Inventory {
         int quantity = inventory.get(name).size();
         return quantity;
     }
-    public static Item removeItem(Item name){
-        inventory.get(name).remove(name);
-        return name;
+    public static void removeItem(String slot){
+        Item item = inventory.get(slot).get(0);
+        inventory.get(slot).remove(item);
     }
 
+<<<<<<< HEAD
     public static Item getItem(String input){
         // add a if input > 1
         List<Item> itemList = inventory.get(input);
         Item itemToVend = itemList.get(0);
         return itemToVend;
+=======
+    public static Item getItem(String slot){
+        List<Item> itemList = inventory.get(slot);
+        if (itemList.size() > 0) {
+            Item itemToVend = itemList.get(0);
+            return itemToVend;
+        }
+        return null;
+>>>>>>> 9340da7bd6d364c71d00dbce6e7798cda889d0a8
     }
 
     public static Map<String, List<Item>> getInventory() {
