@@ -30,7 +30,7 @@ public class Purchase {
                 Printer.println(option);
             }
             Printer.newLine();
-            Printer.println("Current balance: $" + getBalance());
+            Printer.println("Current Money Provided: $" + getBalance());
             Printer.newLine();
             String input = UserInput.get("Please enter your selection: ");
             issueCommand(input);
@@ -49,13 +49,14 @@ public class Purchase {
 
     public static void feedMoney() {
         Printer.newLine();
-        String input = UserInput.get("Please feed money now (accepts whole numbers): $");
-        if (isValidInt(input)) {
+        String input = UserInput.get("Please feed money now (1, 2, 5, or 10): $");
+        System.out.println(input);
+        if (isValidInt(input) && (input.equals("1") || input.equals("2") || input.equals("5") || input.equals("10"))) {
             addToBalance(input);
             FileIO.appendLog("FEED MONEY:", MoneyMath.format(input), balance);
         } else {
             Printer.newLine();
-            Printer.println("Please enter a valid positive whole number.\n");
+            Printer.println("Please enter 1, 2, 5, or 10.\n");
         }
     }
 
