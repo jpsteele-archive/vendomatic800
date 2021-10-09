@@ -13,10 +13,10 @@ public class SalesReport {
 
     /*
     on startup: load runningSalesMap from persistentFile, check FileIO.getCsvLines() for new items -- DONE
-    on sale: update runningSalesMap and overwrite persistentFile
+    on sale: update runningSalesMap and overwrite persistentFile -- DONE
         Need to fill in the method for adding to totalSales -- DONE
         Need a method to overwrite the persistentFile in FileIO given the runningSalesMap and totalSales (check the readme on formatting this)
-    on main menu option 4: write new file in salesReportDir
+    on main menu option 4: write new file in salesReportDir -- DONE
         This can use the same method in FileIO as overwriting the persistentFile using a passed boolean maybe?
      */
 
@@ -49,13 +49,14 @@ public class SalesReport {
     }
 
     public static void addTotal(String price) {
-        MoneyMath.add(totalSales, price);
+        String total = MoneyMath.add(totalSales, price);
+        totalSales = total;
     }
 
     public static void run(){
-        // method to create new file that prints out the map
+        FileIO.writeSalesReport(false);
         for (String element : runningSalesMap.keySet()){
-            Printer.println(element + "\\|" + runningSalesMap.get(element));
+            Printer.println(element + "|" + runningSalesMap.get(element));
         }
         Printer.newLine();
         Printer.println("Total Sales: $" + totalSales);
