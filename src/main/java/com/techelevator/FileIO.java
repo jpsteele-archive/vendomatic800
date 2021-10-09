@@ -74,7 +74,7 @@ public class FileIO {
      * @param leftAmount first monetary value
      * @param rightAmount second monetary value
      */
-    public static void appendLog(String action, double leftAmount, double rightAmount) {
+    public static void appendLog(String action, String leftAmount, String rightAmount) {
         LocalDateTime dateTime = LocalDateTime.now();
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
         try (PrintWriter writer = new PrintWriter(new FileOutputStream(logFile, true))) {

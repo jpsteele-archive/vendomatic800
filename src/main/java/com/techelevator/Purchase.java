@@ -6,22 +6,24 @@ import java.util.List;
 import java.util.Map;
 
 public class Purchase {
-    private static double balance = 0.0;
+    private static String balance = MoneyMath.format("0");
 
     private static List<String> options = List.of(
             "(1) Feed Money",
             "(2) Select Product",
             "(3) Finish Transaction");
+    private static boolean loop;
 
 
     public static void run() {
-        while (true) {
+        loop = true;
+        while (loop) {
             Printer.newLine();
             for (String option: options) {
                 Printer.println(option);
             }
             Printer.newLine();
-            Printer.println("Current balance: " + getBalance());
+            Printer.println("Current balance: $" + getBalance());
             Printer.newLine();
             String input = UserInput.get("Please enter your selection: ");
             issueCommand(input);
@@ -40,9 +42,9 @@ public class Purchase {
 
     public static void feedMoney() {
         Printer.newLine();
-        String input = UserInput.get("Please feed money now (accepts whole numbers): ");
+        String input = UserInput.get("Please feed money now (accepts whole numbers): $");
         if (isValidInt(input)) {
-            addToBalance(Double.parseDouble(input));
+            addToBalance(input);
         } else {
             Printer.newLine();
             Printer.println("Please enter a valid positive whole number.\n");
@@ -57,8 +59,8 @@ public class Purchase {
         }
     }
 
-    public static void addToBalance(double amount) {
-        balance += amount;
+    public static void addToBalance(String amount) {
+        balance = MoneyMath.add(balance, amount);
     }
 
     public static boolean isValidKeySlot(String input) {
@@ -75,7 +77,8 @@ public class Purchase {
         String input;
         MainMenu.displayItems();
         while (true) {
-            input = UserInput.get("Please enter your selection:");
+            Printer.newLine();
+            input = UserInput.get("Please enter your selection: ");
             if (!isValidKeySlot(input)) {
                 Printer.println("Input not valid. ");
                 continue;
@@ -88,8 +91,8 @@ public class Purchase {
             return;
         }
         String itemName = itemToVend.getName();
-        double itemPrice = itemToVend.getPrice();
-        double balanceBefore = getBalance();
+        String itemPrice = String.valueOf(itemToVend.getPrice());
+        String balanceBefore = getBalance();
         if (!debit(itemPrice)) {
             Printer.println("Insufficient funds! Please feed more money.");
             return;
@@ -102,41 +105,41 @@ public class Purchase {
     }
 
     public static void makeChange() {
-        double initialBalance = getBalance();
+        String initialBalance = getBalance();
         int quarters = 0;
         int dimes = 0;
         int nickels = 0;
 
-        while (balance > 0) {
-            if (balance >= 0.25) {
-                balance -= 0.25;
+        while (Double.parseDouble(balance) > 0.00) {
+            if (Double.parseDouble(balance) >= 0.25) {
+                balance = MoneyMath.subtract(balance, "0.25");
                 quarters++;
-            } else if (balance >= 0.10) {
-                balance -= 0.10;
+            } else if (Double.parseDouble(balance) >= 0.10) {
+                balance = MoneyMath.subtract(balance, "0.10");
                 dimes++;
             } else {
-                balance -= 0.05;
+                balance = MoneyMath.subtract(balance, "0.05");
                 nickels++;
             }
         }
-
         Printer.newLine();
-        Printer.println("Your change is " + initialBalance + " dispensed in " + quarters + " quarters, " + dimes
-                + " dimes, and " + nickels + " nickels. Thank you for your business!\n");
+        Printer.println("Your change is $" + initialBalance + " dispensed in " + quarters + " quarters, " + dimes
+                + " dimes, and " + nickels + " nickels. Thank you for your business!");
+        loop = false;
     }
 
-    public static double getBalance() {
+    public static String getBalance() {
         return balance;
     }
 
-    public double resetBalance() {
-        this.balance = 0;
+    public String resetBalance() {
+        balance = "0.00";
         return balance;
     }
 
-    public static boolean debit(double price) {
-        if (balance > price) {
-            balance -= price;
+    public static boolean debit(String price) {
+        if (Double.parseDouble(balance) > Double.parseDouble(price)) {
+            balance = MoneyMath.subtract(balance, String.valueOf(price));
             return true;
         }
         else return false;
