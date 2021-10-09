@@ -52,7 +52,7 @@ public class SalesReport {
     //
 
 
-    public static double getTotalSales() {
+    public static String getTotalSales() {
         return totalSales;
     }
 }
