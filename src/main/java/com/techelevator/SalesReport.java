@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class SalesReport {
-    private static double totalSales = 0.0;
+    private static String totalSales;
     private static Map<String, Integer> runningSalesMap = new HashMap<>();
 
     /*
@@ -20,6 +20,7 @@ public class SalesReport {
     public static void loadRunningSalesMap() {
         runningSalesMap = FileIO.loadSalesReport();
         addNewItemsToSalesMap();
+        totalSales = FileIO.loadSalesReportTotal();
     }
 
     public static void addNewItemsToSalesMap(){
@@ -40,9 +41,13 @@ public class SalesReport {
         return runningSalesMap;
     }
 
-    // add to sales number
+    public static void addSale(String itemName) {
+        runningSalesMap.put(itemName, runningSalesMap.get(itemName) + 1);
+    }
 
-    // add to total
+    public static void addTotal(double price) {
+
+    }
 
     //
 

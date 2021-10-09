@@ -43,10 +43,17 @@ public class Inventory {
         return -1;
     }
 
+    /**
+     * @param slot - A verified String indicating a slot in the vending machine. An item is removed from this slot.
+     */
     public static void removeItem(String slot){
         inventory.get(slot).remove(0);
     }
 
+    /**
+     * @param slot - A verified String indicating a slot in the vending machine
+     * @return The item if in stock, otherwise returns null
+     */
     public static Item getItem(String slot){
         List<Item> itemList = inventory.get(slot);
         if (itemList.size() > 0) {
