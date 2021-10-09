@@ -46,6 +46,10 @@ public class FileIO {
         return salesReportMap;
     }
 
+    public static String loadSalesReportTotal() {
+        return "";
+    }
+
     public static void createNewSalesReport(Item item, int quantity){
         try(PrintWriter append = new PrintWriter(salesReportDir)){
             append.println();
