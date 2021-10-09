@@ -136,7 +136,7 @@ public class Purchase {
                 nickels++;
             }
         }
-        FileIO.appendLog("MAKE CHANGE:", MoneyMath.format(initialBalance), balance);
+        FileIO.appendLog("GIVE CHANGE:", MoneyMath.format(initialBalance), balance);
         Printer.newLine();
         Printer.println("Your change is $" + initialBalance + " dispensed in " + quarters + " quarters, " + dimes
                 + " dimes, and " + nickels + " nickels. Thank you for your business!");
@@ -153,11 +153,10 @@ public class Purchase {
     }
 
     public static boolean debit(String price) {
-        if (Double.parseDouble(balance) > Double.parseDouble(price)) {
-            balance = MoneyMath.subtract(balance, String.valueOf(price));
+        if (Double.parseDouble(balance) >= Double.parseDouble(price)) {
+            balance = MoneyMath.subtract(balance, price);
             return true;
         }
         else return false;
     }
-
 }

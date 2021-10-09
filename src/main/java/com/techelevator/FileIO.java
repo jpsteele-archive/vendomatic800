@@ -61,7 +61,7 @@ public class FileIO {
     public static boolean writeSalesReport(boolean isPersistent) {
         File file;
         LocalDateTime dateTime = LocalDateTime.now();
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("MM-DD-yyyy_HH-mm-ss");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("MM-dd-yyyy_HH-mm-ss");
         if (isPersistent) file = persistentSalesReportFile;
         else file = new File(salesReportDir + "SR_" + dateTime.format(format) + ".csv");
         File dir = new File(salesReportDir);
