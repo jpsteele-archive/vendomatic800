@@ -6,6 +6,13 @@ import java.util.List;
 import java.util.Map;
 
 public class Purchase {
+
+    /*
+    vendProduct needs to output the message for the item being vended ("crunch crunch yum!")
+    log and sales report need to be updated appropriately when items are purchased. Some methods still need to be written for this in Sales Report
+    Make sure output looks clean with newLines
+     */
+
     private static String balance = MoneyMath.format("0");
 
     private static List<String> options = List.of(

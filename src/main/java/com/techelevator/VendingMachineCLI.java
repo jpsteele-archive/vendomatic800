@@ -10,3 +10,13 @@ public class VendingMachineCLI {
 		MainMenu.run();
 	}
 }
+
+
+/*
+These classes need work:
+Purchase
+SalesReport
+FileIO
+
+See notes in the classes!
+ */
