@@ -100,7 +100,7 @@ public class Purchase {
         Inventory.removeItem(input);
         FileIO.appendLog(itemName, balanceBefore, getBalance());
         SalesReport.addToSalesReportMap(itemName);
-        SalesReport.addToTotal(itemPrice);
+        SalesReport.addToTotal(itemToVend.getPrice());
         Printer.println("Thank you for your purchase!");
     }
 
