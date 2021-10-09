@@ -52,6 +52,15 @@ public class SalesReport {
         MoneyMath.add(totalSales, price);
     }
 
+    public static void run(){
+        // method to create new file that prints out the map
+        for (String element : runningSalesMap.keySet()){
+            Printer.println(element + "\\|" + runningSalesMap.get(element));
+        }
+        Printer.newLine();
+        Printer.println("Total Sales: $" + totalSales);
+    }
+
     public static String getTotalSales() {
         return totalSales;
     }

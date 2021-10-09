@@ -66,6 +66,6 @@ public class MainMenu {
     }
 
     public static void salesReport() {
-
+        SalesReport.run();
     }
 }
