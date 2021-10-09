@@ -54,7 +54,7 @@ public class SalesReport {
     }
 
     public static void run(){
-        FileIO.writeSalesReport(false);
+        if (FileIO.writeSalesReport(false)) Printer.println("\nFile creation success!\n");
         for (String element : runningSalesMap.keySet()){
             Printer.println(element + "|" + runningSalesMap.get(element));
         }

@@ -34,6 +34,8 @@ node_modules
 
 # Add any directories, files, or patterns you don't want to be tracked by version control
 Log.txt
+src/main/resources
+src/main/sales_reports
 
 # Eclipse
 .classpath

@@ -62,6 +62,7 @@ public class MainMenu {
     }
 
     public static void exit() {
+        FileIO.writeSalesReport(true);
         System.exit(0);
     }
 

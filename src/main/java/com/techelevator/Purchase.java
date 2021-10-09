@@ -111,6 +111,7 @@ public class Purchase {
         FileIO.appendLog(logName, balanceBefore, getBalance());
         SalesReport.addSale(itemName);
         SalesReport.addTotal(itemPrice);
+        Printer.newLine();
         Printer.println("Thank you for your purchase!");
     }
 
