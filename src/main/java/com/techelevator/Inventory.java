@@ -33,6 +33,7 @@ public class Inventory {
     }
 
     public static Item getItem(String input){
+        // add a if input > 1
         List<Item> itemList = inventory.get(input);
         Item itemToVend = itemList.get(0);
         return itemToVend;

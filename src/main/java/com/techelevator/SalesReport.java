@@ -44,6 +44,8 @@ public class SalesReport {
 
     // add to total
 
+    //
+
 
     public static double getTotalSales() {
         return totalSales;

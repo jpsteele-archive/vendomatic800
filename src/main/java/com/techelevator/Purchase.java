@@ -120,4 +120,9 @@ public class Purchase {
         return balance;
     }
 
+    public double resetBalance() {
+        this.balance = 0;
+        return balance;
+    }
+
 }
