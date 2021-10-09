@@ -8,6 +8,8 @@ public class Candy extends Item{
     @Override
     public String giveMessage(){
         String candyMessage = "Munch Munch, Yum!";
+        Printer.newLine();
+        Printer.println(candyMessage);
         return candyMessage;
     }
 }
