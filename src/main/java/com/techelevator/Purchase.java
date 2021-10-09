@@ -132,6 +132,8 @@ public class Purchase {
     public double resetBalance() {
         this.balance = 0;
         return balance;
+    }
+
     public static boolean debit(double price) {
         if (balance > price) {
             balance -= price;
