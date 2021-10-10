@@ -6,15 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Purchase {
-
-    /*
-    vendProduct needs to output the message for the item being vended ("crunch crunch yum!") -- DONE
-    log and sales report need to be updated appropriately when items are purchased. Some methods still need to be written for this in Sales Report
-    Make sure output looks clean with newLines -- DONE
-     */
-
     private static String balance = MoneyMath.format("0");
-
     private static List<String> options = List.of(
             "(1) Feed Money",
             "(2) Select Product",
@@ -37,14 +29,16 @@ public class Purchase {
         }
     }
 
-    public static void issueCommand(String input) {
+    public static boolean issueCommand(String input) {
         if (input.equals("1")) feedMoney();
         else if (input.equals("2")) vendProduct();
         else if (input.equals("3")) makeChange();
         else {
             Printer.newLine();
             Printer.println("Please enter a valid input");
+            return false;
         }
+        return true;
     }
 
     public static void feedMoney() {
@@ -72,27 +66,18 @@ public class Purchase {
     }
 
     public static boolean isValidKeySlot(String input) {
-        boolean isvalid = false;
-        for (String element : Inventory.getInventory().keySet()) {
-            if (input.equals(element)) {
-                isvalid = true;
-            }
-        }
-        return isvalid;
+        return Inventory.getInventory().containsKey(input);
     }
 
     public static void vendProduct() {
         String input;
         MainMenu.displayItems();
-        while (true) {
+        Printer.newLine();
+        input = UserInput.get("Please enter your selection: ");
+        if (!isValidKeySlot(input)) {
             Printer.newLine();
-            input = UserInput.get("Please enter your selection: ");
-            if (!isValidKeySlot(input)) {
-                Printer.newLine();
-                Printer.println("Input not valid. ");
-                return;
-            }
-            break;
+            Printer.println("Input not valid. ");
+            return;
         }
         Item itemToVend = Inventory.getItem(input);
         if (itemToVend == null) {
@@ -118,7 +103,7 @@ public class Purchase {
         Printer.println("Thank you for your purchase!");
     }
 
-    public static void makeChange() {
+    public static String makeChange() {
         String initialBalance = getBalance();
         int quarters = 0;
         int dimes = 0;
@@ -138,9 +123,11 @@ public class Purchase {
         }
         FileIO.appendLog("GIVE CHANGE:", MoneyMath.format(initialBalance), balance);
         Printer.newLine();
-        Printer.println("Your change is $" + initialBalance + " dispensed in " + quarters + " quarters, " + dimes
-                + " dimes, and " + nickels + " nickels. Thank you for your business!");
+        String output = "Your change is $" + initialBalance + " dispensed in " + quarters + " quarters, " + dimes
+                + " dimes, and " + nickels + " nickels. Thank you for your business!";
+        Printer.println(output);
         loop = false;
+        return output;
     }
 
     public static String getBalance() {
@@ -157,6 +144,6 @@ public class Purchase {
             balance = MoneyMath.subtract(balance, price);
             return true;
         }
-        else return false;
+        return false;
     }
 }
