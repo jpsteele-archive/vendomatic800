@@ -25,12 +25,16 @@ public class MainMenu {
 
     }
 
-    public static void issueCommand(String input) {
+    public static boolean issueCommand(String input) {
         if (input.equals("1")) displayItems();
         else if (input.equals("2")) purchase();
         else if (input.equals("3")) exit();
         else if (input.equals("4")) salesReport();
-        else Printer.println("\nPlease enter a valid input");
+        else {
+            Printer.println("\nPlease enter a valid input");
+            return false;
+        }
+        return true;
     }
 
     public static void displayItems() {
@@ -45,6 +49,7 @@ public class MainMenu {
         Collections.sort(keys);
         Printer.newLine();
         Printer.println("Current Inventory:");
+        String t = "";
         for (String slot : keys) {
             items = inventory.get(slot);
             size = items.size();
@@ -55,6 +60,7 @@ public class MainMenu {
                 Printer.println(slot + ": SOLD OUT");
             }
         }
+
     }
 
     public static void purchase() {
