@@ -75,26 +75,4 @@ public class SalesReportTests {
         Assert.assertEquals(expected1, result1);
         Assert.assertEquals(expected2, result2);
     }
-
-    @Test
-    public void loadRunningSalesMap_appropriately_populates_sales_map_and_totalSales() {
-        SalesReport.loadRunningSalesMap();
-        salesMap = FileIO.loadSalesReport();
-        String totalSales = FileIO.loadSalesReportTotal();
-
-        int result1 = SalesReport.getItemSoldCount("Dr. Salt");
-        int expected1 = salesMap.get("Dr. Salt");
-        int result2 = SalesReport.getItemSoldCount("Mountain Melter");
-        int expected2 = salesMap.get("Mountain Melter");
-        int result3 = SalesReport.getItemSoldCount("Chiclets");
-        int expected3 = salesMap.get("Chiclets");
-
-        String result4 = SalesReport.getTotalSales();
-        String expected4 = totalSales;
-
-        Assert.assertEquals(expected1, result1);
-        Assert.assertEquals(expected2, result2);
-        Assert.assertEquals(expected3, result3);
-        Assert.assertEquals(expected4, result4);
-    }
 }

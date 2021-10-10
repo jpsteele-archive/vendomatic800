@@ -108,6 +108,9 @@ public class Purchase {
         int quarters = 0;
         int dimes = 0;
         int nickels = 0;
+        String qString = "quarters";
+        String dString = "dimes";
+        String nString = "nickels";
 
         while (Double.parseDouble(balance) > 0.00) {
             if (Double.parseDouble(balance) >= 0.25) {
@@ -122,9 +125,12 @@ public class Purchase {
             }
         }
         FileIO.appendLog("GIVE CHANGE:", MoneyMath.format(initialBalance), balance);
+        if (quarters == 1) qString = "quarter";
+        if (dimes == 1) dString = "dime";
+        if (nickels == 1) nString = "nickel";
         Printer.newLine();
-        String output = "Your change is $" + initialBalance + " dispensed in " + quarters + " quarters, " + dimes
-                + " dimes, and " + nickels + " nickels. Thank you for your business!";
+        String output = "Your change is $" + initialBalance + " dispensed in " + quarters + " " + qString + ", " + dimes
+                + " " + dString + ", and " + nickels + " " + nString + ". Thank you for your business!";
         Printer.println(output);
         loop = false;
         return output;
