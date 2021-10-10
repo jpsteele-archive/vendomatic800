@@ -2,7 +2,7 @@ package com.techelevator;
 
 import org.junit.Test;
 
-public class UserInputTest {
+public class UserInputTests {
 //    public static String get() {
 //        return scanner.nextLine();
 //    }

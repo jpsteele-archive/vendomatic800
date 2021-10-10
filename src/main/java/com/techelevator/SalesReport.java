@@ -20,7 +20,9 @@ public class SalesReport {
     public static void addNewItemsToSalesMap(){
         // create a set of the names of the items already in the sales report
         Set<String> salesReportKeys = runningSalesMap.keySet();
-        // iterate through the item data in the csv file
+        // Load the csv file, generate csvLines
+        FileIO.loadCsv();
+        // iterate through the item data in csvLines
         for (String[] element : FileIO.getCsvLines()){
             // set the item name value to a string variable
             String itemName = element[1];
@@ -35,13 +37,20 @@ public class SalesReport {
         return runningSalesMap;
     }
 
-    public static void addSale(String itemName) {
+    public static boolean addSale(String itemName) {
+        if (!runningSalesMap.keySet().contains(itemName)) return false;
         runningSalesMap.put(itemName, runningSalesMap.get(itemName) + 1);
+        return true;
     }
 
     public static void addTotal(String price) {
         String total = MoneyMath.add(totalSales, price);
         totalSales = total;
+    }
+
+    public static int getItemSoldCount(String itemName) {
+        if (!runningSalesMap.keySet().contains(itemName)) return -1;
+        return runningSalesMap.get(itemName);
     }
 
     public static void run(){
@@ -55,5 +64,14 @@ public class SalesReport {
 
     public static String getTotalSales() {
         return totalSales;
+    }
+
+    public static void resetFields() {
+        totalSales = "0.00";
+        runningSalesMap = new HashMap<>();
+    }
+
+    public static void setRunningSalesMap(Map<String,Integer> map) {
+        runningSalesMap = map;
     }
 }
