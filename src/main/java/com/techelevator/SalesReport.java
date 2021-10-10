@@ -11,15 +11,6 @@ public class SalesReport {
     private static String totalSales;
     private static Map<String, Integer> runningSalesMap = new HashMap<>();
 
-    /*
-    on startup: load runningSalesMap from persistentFile, check FileIO.getCsvLines() for new items -- DONE
-    on sale: update runningSalesMap and overwrite persistentFile -- DONE
-        Need to fill in the method for adding to totalSales -- DONE
-        Need a method to overwrite the persistentFile in FileIO given the runningSalesMap and totalSales (check the readme on formatting this)
-    on main menu option 4: write new file in salesReportDir -- DONE
-        This can use the same method in FileIO as overwriting the persistentFile using a passed boolean maybe?
-     */
-
     public static void loadRunningSalesMap() {
         runningSalesMap = FileIO.loadSalesReport();
         addNewItemsToSalesMap();

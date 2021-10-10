@@ -10,7 +10,7 @@ public class Item {
     }
 
     public String giveMessage() {
-        return "Please enter an item";
+        return "";
     }
 
     public String getName() {

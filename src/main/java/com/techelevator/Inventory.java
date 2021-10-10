@@ -23,19 +23,6 @@ public class Inventory {
         }
     }
 
-    /**
-     * @param name name of the item
-     * @return quantity of the item in inventory if it is found. Otherwise returns -1
-     */
-    public static int getItemQuantity(Item name){
-        for (List<Item> itemList : inventory.values()) {
-            if (itemList.get(0).getName().equals("name")) {
-                return itemList.size();
-            }
-        }
-        return -1;
-    }
-
     public static int getItemQuantity(String slot) {
         if (inventory.keySet().contains(slot)) {
             return inventory.get(slot).size();
@@ -63,7 +50,7 @@ public class Inventory {
         return null;
     }
 
-    public static void setInventory(Map<String,List<Item>> map) {
+    public static void set(Map<String,List<Item>> map) {
         inventory = map;
     }
 
