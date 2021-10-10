@@ -14,8 +14,8 @@ public class PurchaseTests {
     addToBalance appropriately changes the balance - DONE
     isValidKeySlot returns appropriate boolean - DONE
     makeChange returns appropriate String
-    debit returns the appropriate boolean
-    debit appropriately changes balance
+    debit returns the appropriate boolean - DONE
+    debit appropriately changes balance - DONE
      */
 
     @Before
@@ -47,6 +47,12 @@ public class PurchaseTests {
         Assert.assertFalse(result1);
         Assert.assertFalse(result2);
         Assert.assertFalse(result3);
+    }
+
+    @Test
+    public void issuCommand_returns_true_upon_success() {
+        boolean result = Purchase.issueCommand("3");
+        Assert.assertTrue(result);
     }
 
     @Test
@@ -83,29 +89,75 @@ public class PurchaseTests {
         Assert.assertEquals(expected3, result3);
     }
 
-
-
-
-
-
-
     @Test
-    public void basic_test_make_change(){ //shows that with a basic full integer it works
-        Purchase.addToBalance("1.0");
-        String input = Purchase.getBalance();
-        test.makeChange();
+    public void debit_returns_appropriate_boolean() {
+        Purchase.addToBalance("20.00");
+        boolean result1 = Purchase.debit("2.00");
+        boolean result2 = Purchase.debit("7.50");
+        boolean result3 = Purchase.debit("5.50");
+        boolean result4 = Purchase.debit("7.75");
+
+        Assert.assertTrue(result1);
+        Assert.assertTrue(result2);
+        Assert.assertTrue(result3);
+        Assert.assertFalse(result4);
     }
 
     @Test
-    public void test_make_change_negative_number(){ // Right now this is still giving an output when it probs shouldnt
-        Purchase.addToBalance("-1.0");
-        String input = Purchase.getBalance();
-        test.makeChange();
+    public void debit_appropriately_changes_balance() {
+        Purchase.addToBalance("20.00");
+        Purchase.debit("2.00");
+        String result1 = Purchase.getBalance();
+        String expected1 = "18.00";
+        Purchase.debit("7.50");
+        String result2 = Purchase.getBalance();
+        String expected2 = "10.50";
+        Purchase.debit("5.505");
+        String result3 = Purchase.getBalance();
+        String expected3 = "5.00";
+        Purchase.debit("7.75");
+        String result4 = Purchase.getBalance();
+        String expected4 = "5.00";
+
+        Assert.assertEquals(expected1, result1);
+        Assert.assertEquals(expected2, result2);
+        Assert.assertEquals(expected3, result3);
+        Assert.assertEquals(expected4, result4);
     }
+
     @Test
-    public void test_make_change_dimes_at_40(){
-        Purchase.addToBalance("19.35");
-        String input = Purchase.getBalance();
-        // somehow this test got chopped in a merge or something
+    public void makeChange_returns_appropriate_string() {
+        Purchase.addToBalance("0.40");
+        String result1 = Purchase.makeChange();
+        String expected1 = "Your change is $0.40 dispensed in 1 quarter, 1 dime, and 1 nickel. Thank you for your business!";
+        Purchase.addToBalance("0.70");
+        String result2 = Purchase.makeChange();
+        String expected2 = "Your change is $0.70 dispensed in 2 quarters, 2 dimes, and 0 nickels. Thank you for your business!";
+        Purchase.addToBalance("0.00");
+        String result3 = Purchase.makeChange();
+        String expected3 = "Your change is $0.00 dispensed in 0 quarters, 0 dimes, and 0 nickels. Thank you for your business!";
+        Purchase.addToBalance("0.05");
+        String result4 = Purchase.makeChange();
+        String expected4 = "Your change is $0.05 dispensed in 0 quarters, 0 dimes, and 1 nickel. Thank you for your business!";
+
+        Assert.assertEquals(expected1, result1);
+        Assert.assertEquals(expected2, result2);
+        Assert.assertEquals(expected3, result3);
+        Assert.assertEquals(expected4, result4);
+
+    }
+
+    @Test
+    public void makeChange_sets_balance_to_0() {
+        Purchase.addToBalance("100.00");
+        Purchase.makeChange();
+        String result1 = Purchase.getBalance();
+        Purchase.addToBalance("5.40");
+        Purchase.makeChange();
+        String result2 = Purchase.getBalance();
+        String expected = "0.00";
+
+        Assert.assertEquals(expected, result1);
+        Assert.assertEquals(expected, result2);
     }
 }
