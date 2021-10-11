@@ -15,10 +15,7 @@ public class Printer {
 
     public static void splashScreen() {
         for (String string : asciiStrings) {
-            for (int i = 0; i <= 100; i++) {
-                System.out.print(string.charAt(i));
-            }
-            System.out.println();
+            System.out.println(string);
             try {Thread.sleep(300);}
             catch (InterruptedException ignored) {}
         }
