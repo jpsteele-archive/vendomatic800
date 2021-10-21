@@ -73,7 +73,7 @@ String of the slot number as keys. The list size is updated on each sale of an i
 each item and running total of all sales in the Sales Report.
 
 Input validation is achieved by simple if/else logic that matches an expected input with a function or prints an error
-if the input does not match any expected values. This logic is place inside a loop so that the user is instantly 
+if the input does not match any expected values. This logic is placed inside a loop so that the user is instantly 
 redirected to the last menu. Invalid input during Feed Money returns the user to the Purchase menu.
 
 ## Final Thoughts
@@ -89,7 +89,7 @@ While we created classes to separate the logic from inputs, outputs, and file re
 to decouple the Printer class. For example, the Printer class essentially just mirrors System.out methods instead of
 interpreting types of output (menu, error, prompt, etc). Adjusting it to take more general information would make it
 easier to modify to output for a GUI or webpage. In addition, interfaces could have been created for file
-readin/writing and user input/output to further abstract the functionality.
+reading/writing and user input/output to further abstract the functionality.
 
 In all I am happy with the result of this capstone project. It's a simple application, but it works! And it was great
 fun to make :)
